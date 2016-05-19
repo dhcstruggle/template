@@ -1,10 +1,4 @@
 /*
- * dect_client.c
- *
- * Copyright (c) 2016 Yealink Inc.
- *
- * USB Test driver for CMBS-USB
- *
  * ChangeLog:
  * v0.1  - creat file
  */
@@ -60,7 +54,7 @@ unsigned char Sim_data[DATA_SEND_CNT];
 /*****************************************************************************/
 /*  EXPORT */
 /*****************************************************************************/
-unsigned int RTchain_dect2host_data_cb(void *data, unsigned int len)
+unsigned int RTchain_slave2host_data_cb(void *data, unsigned int len)
 {
     if (data != NULL)
     {
@@ -119,7 +113,7 @@ static int SendTDMDataThread(void *data)
 /*****************************************************************************/
 /*  EXPORT */
 /*****************************************************************************/
-unsigned int RTchain_host2dect_data_cb(void *data, unsigned int len)
+unsigned int RTchain_host2slave_data_cb(void *data, unsigned int len)
 {
     int ret = 0;
     if (kfifo_len(&G_st_Spkfifo) > len)
@@ -293,7 +287,7 @@ static void client_exit(void)
 
 module_init(client_init);
 module_exit(client_exit);
-EXPORT_SYMBOL(RTchain_dect2host_data_cb);
-EXPORT_SYMBOL(RTchain_host2dect_data_cb);
+EXPORT_SYMBOL(RTchain_slave2host_data_cb);
+EXPORT_SYMBOL(RTchain_host2slave_data_cb);
 MODULE_LICENSE("GPL");
 
